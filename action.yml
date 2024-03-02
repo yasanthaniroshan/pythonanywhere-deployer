@@ -1,0 +1,34 @@
+name: pythonanywhere-deploy
+description: Deploy to PythonAnywhere
+author : Yasantha Niroshan
+inputs:
+  username:
+    description: 'PythonAnywhere username'
+    required: true
+  apitoken:
+    description: 'PythonAnywhere API token'
+    required: true
+  console_id:
+    description: 'PythonAnywhere console id'
+    required: true
+  host:
+    description: 'host name of the web app'
+    required: false
+    default: pythonanywhere.com
+  branch:
+    description: 'branch to pull from origin'
+    required: true
+    default: main
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Requirements 
+      run : |
+        pip install -r requirements.txt
+      shell: bash
+      
+    - name: Send Command to Terminal of pythonanywhere
+      run: |
+        python3 main.py ${{ inputs.username }} ${{ inputs.apitoken }} main  ${{ inputs.host }} ${{ inputs.console_id }} ${{ inputs.branch }}
+      shell: bash
