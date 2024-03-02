@@ -27,8 +27,11 @@ runs:
       run : |
         pip install -r requirements.txt
       shell: bash
-      
+
     - name: Send Command to Terminal of pythonanywhere
       run: |
         python3 main.py ${{ inputs.username }} ${{ inputs.apitoken }} main  ${{ inputs.host }} ${{ inputs.console_id }} ${{ inputs.branch }}
       shell: bash
+branding:
+  icon: check-circle
+  color: green
